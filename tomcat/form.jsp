@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/form.css">
 <title>掲示板</title>
 </head>
 <body>
