@@ -11,11 +11,16 @@
 <section>
     <h2>新規投稿</h2>
     <form action="" method="post">
-        <label for="t_message">名前</label>
-        <input type="text" name="name" value=""><br>
-        <label for="t_message">本文</label>
-        <textarea name="comment" cols="30" rows="3" maxlength="80" wrap="hard" placeholder="80字以内で入力してください。"></textarea>
-        <input type="submit" value="投稿">
+        <div><label for="t_message">お名前：</label>
+        <input type="text" name="name" value=""><br></div>
+        <div><label for="t_massege">パスワード：</label>
+        <input type="password" name="password" value=""><br></div>
+        <div><label for="t_massege" >題名：</label>
+        <input type="text" name="title" value=""><br></div>
+        <div><label for="t_message">本文：</label>
+        <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard" placeholder="400字以内で入力してください。"></textarea></div>
+        <p class="submit"><input type="submit" value="投稿"></p>
+        <p class="reset"><input type="reset" Value="リセット"></p>
     </form>
 </section>
 <section>
