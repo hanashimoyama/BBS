@@ -10,17 +10,19 @@
 <h1>掲示板</h1>
 <section>
     <h2>新規投稿</h2>
-    <form action="" method="post">
+    <form action="" method="post" action="write.jsp">
         <div><label for="t_message">お名前：</label>
-        <input type="text" name="name" value=""><br></div>
+        <input type="text" class="input" name="name" value=""><br></div>
         <div><label for="t_massege">パスワード：</label>
-        <input type="password" name="password" value=""><br></div>
+        <input type="password" class="input" name="password" value=""><br></div>
         <div><label for="t_massege" >題名：</label>
-        <input type="text" name="title" value=""><br></div>
+        <input type="text" class="input" name="title" value=""><br></div>
         <div><label for="t_message">本文：</label>
         <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard" placeholder="400字以内で入力してください。"></textarea></div>
-        <p class="submit"><input type="submit" value="投稿"></p>
-        <p class="reset"><input type="reset" Value="リセット"></p>
+        <ul class="button">
+        <li><input type="submit" class="submit" value="投稿"></li>
+        <li><input type="reset" class = "reset"  Value="リセット"></li>
+        </ul>
     </form>
 </section>
 <section>
