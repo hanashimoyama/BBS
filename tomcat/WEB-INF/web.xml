@@ -20,4 +20,18 @@
     </url-pattern>
   </servlet-mapping>
 
+    <servlet>
+    <servlet-name>datatest</servlet-name>
+    <servlet-class>DatabaseTest</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>
+      datatest
+    </servlet-name>
+    <url-pattern>
+      /datatest
+    </url-pattern>
+  </servlet-mapping>
+
 </web-app>
