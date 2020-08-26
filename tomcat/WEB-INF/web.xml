@@ -34,4 +34,18 @@
     </url-pattern>
   </servlet-mapping>
 
+    <servlet>
+    <servlet-name>datatest1</servlet-name>
+    <servlet-class>DatabaseTest1</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>
+      datatest1
+    </servlet-name>
+    <url-pattern>
+      /datatest1
+    </url-pattern>
+  </servlet-mapping>
+
 </web-app>
