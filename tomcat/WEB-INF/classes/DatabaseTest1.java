@@ -19,13 +19,13 @@ public class DatabaseTest1 extends HttpServlet {
     out.println("<p>");
 
     Connection conn = null;
-    String url = "jdbc:mysql://localhost:3306/New";
+    String url = "jdbc:mysql://localhost/BBS";
     String user = "BBS";
     String password = "SPn!UA5,,iU,";
 
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
-      out.println("ドライバのロードに成功しました<br>");
+      out.println("ドライバのロードに成功<br>");
 
       conn = DriverManager.getConnection(url, user, password);
       out.println("データベース接続に成功しました<br>");
