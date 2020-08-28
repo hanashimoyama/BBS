@@ -62,4 +62,18 @@
     </url-pattern>
   </servlet-mapping>
 
+      <servlet>
+    <servlet-name>datatest3</servlet-name>
+    <servlet-class>DatabaseTest3</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>
+      datatest3
+    </servlet-name>
+    <url-pattern>
+      /datatest3
+    </url-pattern>
+  </servlet-mapping>
+
 </web-app>
