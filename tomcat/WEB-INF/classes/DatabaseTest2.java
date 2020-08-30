@@ -37,7 +37,7 @@ public class DatabaseTest2 extends HttpServlet {
         String postdate = rs.getString("postdate");
         String comment = rs.getString("sentence");
         out.println("<p>");
-        out.println("ID:" + name + ",お名前:" + name + "パス：" + pass );
+        out.println("ID:" + id + ",お名前:" + name + "パス：" + pass );
         out.println("題名：" + title + "日時：" + postdate + "コメント：" + comment );
         out.println("</p>");
       }

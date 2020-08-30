@@ -27,7 +27,7 @@ public class DatabaseTest3 extends HttpServlet {
 
       Statement stmt = conn.createStatement();
 
-      String sql = "update New set user_name ='Matuda Syouta', pass = 'matudasyouta' where id = 3";
+      String sql = "update New set user_name ='Suda masaki', pass = 'sudamasaki' where id = 3";
       int num = stmt.executeUpdate(sql);
 
       sql = "select * from New";
@@ -41,7 +41,7 @@ public class DatabaseTest3 extends HttpServlet {
         String postdate = rs.getString("postdate");
         String comment = rs.getString("sentence");
         out.println("<p>");
-        out.println("ID:" + name + ",お名前:" + name + "パス：" + pass );
+        out.println("ID:" + id + ",お名前:" + name + "パス：" + pass );
         out.println("題名：" + title + "日時：" + postdate + "コメント：" + comment );
         out.println("</p>");
       }
