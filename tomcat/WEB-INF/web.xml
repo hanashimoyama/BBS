@@ -104,4 +104,18 @@
     </url-pattern>
   </servlet-mapping>
 
+          <servlet>
+    <servlet-name>datatest6</servlet-name>
+    <servlet-class>DatabaseTest6</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>
+      datatest6
+    </servlet-name>
+    <url-pattern>
+      /datatest6
+    </url-pattern>
+  </servlet-mapping>
+
 </web-app>
