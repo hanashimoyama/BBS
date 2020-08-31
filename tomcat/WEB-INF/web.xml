@@ -90,4 +90,18 @@
     </url-pattern>
   </servlet-mapping>
 
+        <servlet>
+    <servlet-name>datatest5</servlet-name>
+    <servlet-class>DatabaseTest5</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>
+      datatest5
+    </servlet-name>
+    <url-pattern>
+      /datatest5
+    </url-pattern>
+  </servlet-mapping>
+
 </web-app>
