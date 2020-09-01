@@ -1,121 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-  version="4.0"
-  metadata-complete="true">
-
-  <servlet>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>HelloWorld</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>
-      hello
-    </servlet-name>
-    <url-pattern>
-      /***
-    </url-pattern>
-  </servlet-mapping>
+         version="4.0"
+         metadata-complete="true">
 
     <servlet>
-    <servlet-name>datatest</servlet-name>
-    <servlet-class>DatabaseTest</servlet-class>
-  </servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>HelloWorld</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest
-    </servlet-name>
-    <url-pattern>
-      /datatest
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            hello
+        </servlet-name>
+        <url-pattern>
+            /***
+        </url-pattern>
+    </servlet-mapping>
 
     <servlet>
-    <servlet-name>datatest1</servlet-name>
-    <servlet-class>DatabaseTest1</servlet-class>
-  </servlet>
+        <servlet-name>datatest</servlet-name>
+        <servlet-class>DatabaseTest</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest1
-    </servlet-name>
-    <url-pattern>
-      /datatest1
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest
+        </servlet-name>
+        <url-pattern>
+            /datatest
+        </url-pattern>
+    </servlet-mapping>
 
-      <servlet>
-    <servlet-name>datatest2</servlet-name>
-    <servlet-class>DatabaseTest2</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>datatest1</servlet-name>
+        <servlet-class>DatabaseTest1</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest2
-    </servlet-name>
-    <url-pattern>
-      /datatest2
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest1
+        </servlet-name>
+        <url-pattern>
+            /datatest1
+        </url-pattern>
+    </servlet-mapping>
 
-      <servlet>
-    <servlet-name>datatest3</servlet-name>
-    <servlet-class>DatabaseTest3</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>datatest2</servlet-name>
+        <servlet-class>DatabaseTest2</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest3
-    </servlet-name>
-    <url-pattern>
-      /datatest3
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest2
+        </servlet-name>
+        <url-pattern>
+            /datatest2
+        </url-pattern>
+    </servlet-mapping>
 
-        <servlet>
-    <servlet-name>datatest4</servlet-name>
-    <servlet-class>DatabaseTest4</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>datatest3</servlet-name>
+        <servlet-class>DatabaseTest3</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest4
-    </servlet-name>
-    <url-pattern>
-      /datatest4
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest3
+        </servlet-name>
+        <url-pattern>
+            /datatest3
+        </url-pattern>
+    </servlet-mapping>
 
-        <servlet>
-    <servlet-name>datatest5</servlet-name>
-    <servlet-class>DatabaseTest5</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>datatest4</servlet-name>
+        <servlet-class>DatabaseTest4</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest5
-    </servlet-name>
-    <url-pattern>
-      /datatest5
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest4
+        </servlet-name>
+        <url-pattern>
+            /datatest4
+        </url-pattern>
+    </servlet-mapping>
 
-          <servlet>
-    <servlet-name>datatest6</servlet-name>
-    <servlet-class>DatabaseTest6</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>datatest5</servlet-name>
+        <servlet-class>DatabaseTest5</servlet-class>
+    </servlet>
 
-  <servlet-mapping>
-    <servlet-name>
-      datatest6
-    </servlet-name>
-    <url-pattern>
-      /datatest6
-    </url-pattern>
-  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>
+            datatest5
+        </servlet-name>
+        <url-pattern>
+            /datatest5
+        </url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>datatest6</servlet-name>
+        <servlet-class>DatabaseTest6</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>
+            datatest6
+        </servlet-name>
+        <url-pattern>
+            /datatest6
+        </url-pattern>
+    </servlet-mapping>
 
 </web-app>
