@@ -16,9 +16,9 @@
             <input type="hidden" name="trigger" value="insert">
             <div><label for="t_message">お名前：</label>
                 <input type="text" class="input" name="name" value=""><br></div>
-            <div><label for="t_massege">パスワード：</label>
+            <div><label for="t_message">パスワード：</label>
                 <input type="password" class="input" name="password" value=""><br></div>
-            <div><label for="t_massege">題名：</label>
+            <div><label for="t_message">題名：</label>
                 <input type="text" class="input" name="title" value=""><br></div>
             <div><label for="t_message">本文：</label>
                 <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard"
