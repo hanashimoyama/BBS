@@ -10,21 +10,22 @@ public void jspInit() {
     } catch (Exception e) {
         e.printStackTrace();
     }
-}
+} 
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/form.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/script.js" charset="UTF-8"></script>
+
     <title>掲示板</title>
 </head>
-
 <body>
     <h1>掲示板</h1>
     <section>
         <h2>新規投稿</h2>
-        <form action="./Database" id="form" method="get" target="top">
+        <form action="./Database" method="POST" id="AjaxForm">
             <input type="hidden" name="trigger" value="insert">
             <div><label for="t_message">お名前：</label>
                 <input type="text" class="input" name="name" value=""><br></div>
@@ -42,36 +43,36 @@ public void jspInit() {
                 <li><input type="reset" class="reset" Value="リセット"></li>
             </ul>
         </form>
+        <div id="result"></div>
     </section>
     <section>
         <h2>投稿一覧</h2>
     </section>
-
-    <table align="center">
-        <%
+    <%  
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         /*String url = "jdbc:mysql://localhost/BBS";
         String user = "BBS";
         String password = "SPn!UA5,,iU,";*/
-
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
-      rs = stmt.executeQuery( "select * from New");
-
-        while(rs.next()){
+      rs = stmt.executeQuery( "select * from New ");
+        while(rs.next()){ 
             %>
-
-        <tr>
-            <td><%= rs.getInt("id")%></td>
-            <td><%= rs.getString("user_name")%></td>
-            <td><%= rs.getString("title")%></td>
-            <td><%= rs.getString("postdate")%></td>
-            <td><%= rs.getString("sentence")%></td>
-        </tr>
-        <%
+    <div class="box">
+        <table>
+            <tr>
+                <td>id:<%= rs.getInt(1)%></td>
+                <td>名前:<%= rs.getString(2)%></td>
+                <td><%= rs.getString(4)%></td>
+                <td><%= rs.getString(5)%></td>
+                <td><%= rs.getString(6)%></td>
+            </tr>
+        </table>
+    </div>
+    <%
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -82,8 +83,5 @@ public void jspInit() {
         try { conn.close(); } catch (Exception e) {}
     }
         %>
-    </table>
 </body>
-
-
 </html>

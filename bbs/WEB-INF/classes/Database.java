@@ -9,8 +9,10 @@ public class Database extends HttpServlet {
   String user = "BBS";
   String password = "SPn!UA5,,iU,";
 
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    
+    request.setCharacterEncoding("utf-8");
     String Trigger = request.getParameter("trigger");
 
     switch (Trigger) {
