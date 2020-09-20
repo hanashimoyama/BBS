@@ -10,7 +10,9 @@ padding: 0.5em 1em;
 font-weight: normal;
 color: #000000;/*文字色*/
 background: #FFF;
+text-align: left;
 }
+
 form {
   margin: 0 auto;
   width: 600px;
@@ -53,4 +55,17 @@ ul.button li{
 }
 input.reset,input.submit{
   width: 100px;
+}
+
+.ID{
+  color: darkslategrey;
+  font-weight:bolder;
+}
+
+.TITLE{
+  color: slategray;
+}
+
+td{
+  display: inline-block;
 }
