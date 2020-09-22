@@ -39,14 +39,13 @@ public void jspInit() {
             <div><label for="t_message">本文：</label>
                 <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard"
                     placeholder="400字以内で入力してください。"></textarea></div>
-            <ul class="button">
+            <div class="buttons1">
                 <li>
                     <input type="submit" class="submit" Value="書き込み">
                 </li>
                 <li><input type="reset" class="reset" Value="リセット"></li>
-            </ul>
+            </div>
         </form>
-        <div id="result"></div>
     </section>
     <section>
         <h2>投稿一覧</h2>
@@ -82,8 +81,11 @@ public void jspInit() {
             <tr>
                 <td><%= rs.getString(6)%></td>
             </tr>
-
         </table>
+        <div class="buttons2">
+            <button>編集</button>
+            <button>削除</button>
+        </div>
     </div>
     <%
         }
