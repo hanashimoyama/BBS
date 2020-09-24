@@ -1,59 +1,84 @@
 body{
-    text-align:center;
+  text-align:center;
+}
+
+.box{
+width: 600px;
+border: solid 1px #A7A7A7;/*線*/
+border-radius: 10px;/*角の丸み*/
+margin: 3em auto;
+padding: 0.5em 1em;
+font-weight: normal;
+color: #000000;/*文字色*/
+background: #FFF;
+text-align: left;
 }
 
 form {
-    /* フォームをページの中央に置く */
-    margin: 0 auto;
-    width: 600px;
-    /* フォームの範囲がわかるようにする */
-    padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-  }
+  margin: 0 auto;
+  width: 600px;
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
 
-  form div{
-    margin-bottom: 1em;
-  }
+form div{
+  margin-bottom: 1em;
+}
 
-  label {
-    /* すべてのラベルを同じサイズにして、きちんと揃える */
-    display: inline-block;
-    width: 120px;
-    text-align: right;
-  }
+label {
+  /* すべてのラベルを同じサイズにして、きちんと揃える */
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+}
 
-  input.input {
-    /* すべてのテキストフィールドのフォント設定を一致させる
-       デフォルトで、textarea は等幅フォントが設定されている */
-    font: 1em sans-serif;
-  
-    /* すべてのテキストフィールドを同じサイズにする */
+input.input {
+  /* すべてのテキストフィールドのフォント設定を一致させる
+     デフォルトで、textarea は等幅フォントが設定されている */
+  font: 1em sans-serif;
+  /* すべてのテキストフィールドを同じサイズにする */
+  width: 300px;
+  box-sizing: border-box;
+  /* テキストフィールドのボーダーの外見を同一にする */
+  border: 1px solid #999;
+}
+
+textarea{
+    height: 150px;
+    vertical-align: top;
     width: 300px;
     box-sizing: border-box;
-  
-    /* テキストフィールドのボーダーの外見を同一にする */
     border: 1px solid #999;
-  }
+     /* テキスト入力に十分な領域を与える */
+}
 
-  textarea{
-      height: 150px;
-      vertical-align: top;
-      width: 300px;
-      box-sizing: border-box;
-      border: 1px solid #999;
-       /* テキスト入力に十分な領域を与える */
-  }
+.buttons1 li{
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  margin:10px 30px 0px 30px;  
+}
 
+input.reset,input.submit{
+  width: 100px;
+}
 
-  ul.button li{
-    display: inline-block;
-    width: 100px;
-    height: 50px;
-    margin:10px 30px 0px 30px;  
-    
-  }
+.ID{
+  color: darkslategrey;
+  font-weight:bolder;
+}
 
-  input.reset,input.submit{
-    width: 100px;
-  }
+.TITLE{
+  color: slategray;
+}
+
+td{
+  display: inline-block;
+  word-break : break-all;
+}
+
+.buttons2{
+text-align: right;
+vertical-align: bottom;
+}
