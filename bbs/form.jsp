@@ -17,7 +17,7 @@ public void jspInit() {
 
 <head>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" defer></script>
     <script src="${pageContext.request.contextPath}/script.js" defer></script>
 
