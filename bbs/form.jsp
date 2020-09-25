@@ -70,22 +70,35 @@ public void jspInit() {
                     <div class="ID"><%= rs.getInt(1)%>:</div>
                 </td>
                 <td>
-                    <div class="TITLE"><%= rs.getString(4)%></div>
+                    <div class="TITLE">
+                        <%= rs.getString(4)%>
+                    </div>
                 </td>
 
             </tr>
             <tr>
-                <td>名前:<%= rs.getString(2)%></td>
-                <td>投稿日<%= rs.getString(5)%></td>
+
+                <td>
+                    名前:<%= rs.getString(2)%>
+                </td>
+
+
+                <td>
+                    投稿日<%= rs.getString(5)%>
+                </td>
+
             </tr>
             <tr>
-                <td><%= rs.getString(6)%></td>
-            </tr>
-        </table>
-        <div class="buttons2">
-            <button>編集</button>
-            <button>削除</button>
-        </div>
+                <td>
+                    <%= rs.getString(6)%>
+                </td>
+    </div>
+    </tr>
+    </table>
+    <div class="buttons2">
+        <input type="button" value="編集" onclick="win_open1('update.jsp','update')">
+        <input type="button" value="削除" onclick="win_open1()">
+    </div>
     </div>
     <%
         }
