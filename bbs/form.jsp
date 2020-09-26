@@ -41,9 +41,9 @@ public void jspInit() {
                     placeholder="400字以内で入力してください。"></textarea></div>
             <div class="buttons1">
                 <li>
-                    <input type="submit" class="submit" Value="書き込み">
+                    <input type="submit" class="submit" Value="書き込み" class="btn">
                 </li>
-                <li><input type="reset" class="reset" Value="リセット"></li>
+                <li><input type="reset" class="reset" Value="リセット" class="btn"></li>
             </div>
         </form>
     </section>
@@ -65,12 +65,13 @@ public void jspInit() {
             %>
     <div class="box">
         <table>
+
             <tr>
                 <td>
-                    <div class="ID"><%= rs.getInt(1)%>:</div>
+                    <div id="ID"><%=rs.getInt(1)%>:</div>
                 </td>
                 <td>
-                    <div class="TITLE">
+                    <div id="TITLE">
                         <%= rs.getString(4)%>
                     </div>
                 </td>
@@ -96,8 +97,8 @@ public void jspInit() {
     </tr>
     </table>
     <div class="buttons2">
-        <input type="button" value="編集" onclick="win_open1('update.jsp','update')">
-        <input type="button" value="削除" onclick="win_open1()">
+        <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
+        <input type="button" value="削除" onclick="win_open()">
     </div>
     </div>
     <%

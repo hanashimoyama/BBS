@@ -30,10 +30,11 @@ $('#AjaxForm').submit(function (event) {
 
 });
 
-function win_open1(url, name) {
+function win_open(url, name, id) {
+
+    new URLSearchParams({ "id": id })
 
     var obj_window = window.open(url, name, 'width=800,height=500');
-    // 親ウィンドウから子ウィンドウへ値を渡す
-    /*obj_window.document.getElementById("chl_name").value = document.getElementById("pr_name").innerHTML;
-    obj_window.document.getElementById("chl_age").value  = document.getElementById("pr_age").innerHTML;*/
+
+
 }
