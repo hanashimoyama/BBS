@@ -32,9 +32,13 @@ $('#AjaxForm').submit(function (event) {
 
 function win_open(url, name, id) {
 
-    new URLSearchParams({ "id": id })
 
-    var obj_window = window.open(url, name, 'width=800,height=500');
+    var new_url = url + "?" + "id" + "=" + id;
 
+    wx = 800;
+    wy = 500;
+    x = (screen.width - wx) / 2;
+    y = (screen.height - wy) / 2;
+    var obj_window = window.open(new_url, name, "left=" + x + ",top=" + y + ",width=" + wx + ",height=" + wy);
 
 }
