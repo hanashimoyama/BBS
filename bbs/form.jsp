@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+
 <%!
 // サーブレットのinitメソッドに相当
 public void jspInit() {
@@ -54,9 +55,7 @@ public void jspInit() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        /*String url = "jdbc:mysql://localhost/BBS";
-        String user = "BBS";
-        String password = "SPn!UA5,,iU,";*/
+
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
