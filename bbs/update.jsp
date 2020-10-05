@@ -52,6 +52,7 @@ public void jspInit() {
 
     <form action="./Database" method="POST" 　id="AjaxForm">
         <input type="hidden" name="trigger" value="update">
+        <input type="hidden" name="id" value="<%=rs.getInt(1)%>">
         <div><label for="t_message">お名前：</label>
             <input type="text" class="input" name="name" value="<%=rs.getString(2)%>"><br></div>
         <div><label for="t_message">題名：</label>
