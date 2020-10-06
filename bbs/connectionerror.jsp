@@ -18,8 +18,9 @@
 <body>
     <h1>掲示板</h1>
     <section>
-        <h2>エラーです</h2>
-
+        <h2>パスワードが違います</h2>
+        <h3>もう一度最初からやり直してください</h3>
+        <input type="button" Value="閉じる" class="btn" onclick="window.close()">
 </body>
 
 </html>
