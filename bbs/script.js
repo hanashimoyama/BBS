@@ -26,7 +26,19 @@ $('#AjaxForm').submit(function (event) {
             location.reload();
         },
 
-        // 通信失敗時の処理
     });
-    // …
+
 });
+
+function win_open(url, name, id) {
+
+
+    var new_url = url + "?" + "id" + "=" + id;
+
+    wx = 800;
+    wy = 500;
+    x = (screen.width - wx) / 2;
+    y = (screen.height - wy) / 2;
+    var obj_window = window.open(new_url, name, "left=" + x + ",top=" + y + ",width=" + wx + ",height=" + wy);
+
+}

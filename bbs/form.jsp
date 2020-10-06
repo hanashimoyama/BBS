@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+
 <%!
 // サーブレットのinitメソッドに相当
 public void jspInit() {
@@ -41,9 +42,9 @@ public void jspInit() {
                     placeholder="400字以内で入力してください。"></textarea></div>
             <div class="buttons1">
                 <li>
-                    <input type="submit" class="submit" Value="書き込み">
+                    <input type="submit" class="submit" Value="書き込み" class="btn">
                 </li>
-                <li><input type="reset" class="reset" Value="リセット"></li>
+                <li><input type="reset" class="reset" Value="リセット" class="btn"></li>
             </div>
         </form>
     </section>
@@ -54,9 +55,7 @@ public void jspInit() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        /*String url = "jdbc:mysql://localhost/BBS";
-        String user = "BBS";
-        String password = "SPn!UA5,,iU,";*/
+
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
@@ -65,27 +64,41 @@ public void jspInit() {
             %>
     <div class="box">
         <table>
+
             <tr>
                 <td>
-                    <div class="ID"><%= rs.getInt(1)%>:</div>
+                    <div id="ID"><%=rs.getInt(1)%>:</div>
                 </td>
                 <td>
-                    <div class="TITLE"><%= rs.getString(4)%></div>
+                    <div id="TITLE">
+                        <%= rs.getString(4)%>
+                    </div>
                 </td>
 
             </tr>
             <tr>
-                <td>名前:<%= rs.getString(2)%></td>
-                <td>投稿日<%= rs.getString(5)%></td>
+
+                <td>
+                    名前:<%= rs.getString(2)%>
+                </td>
+
+
+                <td>
+                    投稿日<%= rs.getString(5)%>
+                </td>
+
             </tr>
             <tr>
-                <td><%= rs.getString(6)%></td>
-            </tr>
-        </table>
-        <div class="buttons2">
-            <button>編集</button>
-            <button>削除</button>
-        </div>
+                <td>
+                    <%= rs.getString(6)%>
+                </td>
+    </div>
+    </tr>
+    </table>
+    <div class="buttons2">
+        <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
+        <input type="button" value="削除" onclick="win_open()">
+    </div>
     </div>
     <%
         }

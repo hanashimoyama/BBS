@@ -1,35 +1,41 @@
+import javax.servlet.RequestDispatcher;
+import static java.sql.DriverManager.getConnection;
 import java.io.*;
+import java.rmi.ServerException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
 
 public class Database extends HttpServlet {
+  // DBへ接続するのに必要な情報
   Connection conn = null;
   String url = "jdbc:mysql://localhost/BBS";
   String user = "BBS";
   String password = "SPn!UA5,,iU,";
+  String pass = null;
 
-
+  // triggerを受け取り、処理を分岐させる
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-    
     request.setCharacterEncoding("utf-8");
     String Trigger = request.getParameter("trigger");
-
     switch (Trigger) {
       case "insert":
         Insert(request, response);
         break;
+      case "update":
+        Update(request, response);
+        break;
     }
+
   }
 
+  // 新規投稿されたとき
   private void Insert(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(url, user, password);
-      String sql = "insert into New values(?,?,?,?,?,?)";
+      String sql = "INSERT into New values(?,?,?,?,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
-
       pstmt.setInt(1, 0);
       pstmt.setString(2, request.getParameter("name"));
       pstmt.setString(3, request.getParameter("password"));
@@ -37,9 +43,51 @@ public class Database extends HttpServlet {
       pstmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
       pstmt.setString(6, request.getParameter("comment"));
       int num = pstmt.executeUpdate();
-
     } catch (Exception e) {
     } finally {
     }
   }
+
+  // 編集をしたいとき
+  private void Update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    try {
+      boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
+      if (check_ps) {
+        try {
+          Class.forName("com.mysql.jdbc.Driver").newInstance();
+          conn = DriverManager.getConnection(url, user, password);
+          String sql = "UPDATE New SET id = ?, user_name = ?, title = ?, postdate = ?, sentence = ? WHERE id = ?";
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setInt(1, Integer.parseInt(request.getParameter("id")));
+          pstmt.setString(2, request.getParameter("name"));
+          pstmt.setString(3, request.getParameter("title"));
+          pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+          pstmt.setString(5, request.getParameter("comment"));
+          pstmt.setInt(6, Integer.parseInt(request.getParameter("id")));
+          int num = pstmt.executeUpdate();
+          RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
+          dispatcher.forward(request, response);
+        } catch (Exception e) {
+
+        } finally {
+        }
+      } else {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/connectionerror.jsp");
+        dispatcher.forward(request, response);
+      }
+    } catch (Exception e) {
+    }
+  }
+
+  public Boolean Auth(int check_id, String check_pass) throws Exception {
+
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS", "BBS", "SPn!UA5,,iU,");
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * FROM New WHERE id = " + check_id);
+    rs.next();
+    boolean auth = rs.getString("pass").equals(check_pass);
+    return auth;
+
+  }
+
 }
