@@ -25,6 +25,9 @@ public class Database extends HttpServlet {
       case "update":
         Update(request, response);
         break;
+
+      case "delete":
+        Delete(request, response);
     }
 
   }
@@ -34,7 +37,7 @@ public class Database extends HttpServlet {
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(url, user, password);
-      String sql = "INSERT into New values(?,?,?,?,?,?)";
+      String sql = "INSERT into New values(?,?,?,?,?,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, 0);
       pstmt.setString(2, request.getParameter("name"));
@@ -42,6 +45,7 @@ public class Database extends HttpServlet {
       pstmt.setString(4, request.getParameter("title"));
       pstmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
       pstmt.setString(6, request.getParameter("comment"));
+      pstmt.setInt(7, 1);
       int num = pstmt.executeUpdate();
     } catch (Exception e) {
     } finally {
@@ -64,6 +68,33 @@ public class Database extends HttpServlet {
           pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
           pstmt.setString(5, request.getParameter("comment"));
           pstmt.setInt(6, Integer.parseInt(request.getParameter("id")));
+          int num = pstmt.executeUpdate();
+          RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
+          dispatcher.forward(request, response);
+        } catch (Exception e) {
+
+        } finally {
+        }
+      } else {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/connectionerror.jsp");
+        dispatcher.forward(request, response);
+      }
+    } catch (Exception e) {
+    }
+  }
+
+  private void Delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    try {
+      boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
+      if (check_ps) {
+        try {
+          Class.forName("com.mysql.jdbc.Driver").newInstance();
+          conn = DriverManager.getConnection(url, user, password);
+          String sql = "UPDATE New SET flag = ? WHERE id = ?";
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setInt(1, 0);
+          pstmt.setInt(2, Integer.parseInt(request.getParameter("id")));
+
           int num = pstmt.executeUpdate();
           RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
           dispatcher.forward(request, response);
