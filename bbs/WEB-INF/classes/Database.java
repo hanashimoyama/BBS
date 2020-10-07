@@ -19,15 +19,23 @@ public class Database extends HttpServlet {
     request.setCharacterEncoding("utf-8");
     String Trigger = request.getParameter("trigger");
     switch (Trigger) {
-      case "insert":
+     
+        case "insert":
         Insert(request, response);
         break;
-      case "update":
+    
+        case "update":
         Update(request, response);
         break;
+    
+        case "hide":
+        Hide(request, response);
+        break;
 
-      case "delete":
+        case "delete":
         Delete(request, response);
+        break;
+
     }
 
   }
@@ -83,7 +91,7 @@ public class Database extends HttpServlet {
     }
   }
 
-  private void Delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  private void Hide(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
       boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
       if (check_ps) {
@@ -94,6 +102,32 @@ public class Database extends HttpServlet {
           PreparedStatement pstmt = conn.prepareStatement(sql);
           pstmt.setInt(1, 0);
           pstmt.setInt(2, Integer.parseInt(request.getParameter("id")));
+
+          int num = pstmt.executeUpdate();
+          RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
+          dispatcher.forward(request, response);
+        } catch (Exception e) {
+
+        } finally {
+        }
+      } else {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/connectionerror.jsp");
+        dispatcher.forward(request, response);
+      }
+    } catch (Exception e) {
+    }
+  }
+
+  private void Delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    try {
+      boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
+      if (check_ps) {
+        try {
+          Class.forName("com.mysql.jdbc.Driver").newInstance();
+          conn = DriverManager.getConnection(url, user, password);
+          String sql = "Delete FROM New WHERE id = ?";
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setInt(1, Integer.parseInt(request.getParameter("id")));
 
           int num = pstmt.executeUpdate();
           RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
