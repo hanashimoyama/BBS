@@ -59,15 +59,16 @@ public void jspInit() {
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
-      rs = stmt.executeQuery( "select * from New ");
+      rs = stmt.executeQuery( "select * from New WHERE flag = 1");
         while(rs.next()){ 
             %>
+
     <div class="box">
         <table>
 
             <tr>
                 <td>
-                    <div id="ID"><%=rs.getInt(1)%>:</div>
+                    <div id="ID"><%= rs.getInt(1)%>:</div>
                 </td>
                 <td>
                     <div id="TITLE">
@@ -97,7 +98,9 @@ public void jspInit() {
     </table>
     <div class="buttons2">
         <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
-        <input type="button" value="削除" onclick="win_open()">
+        <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
+        <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
+
     </div>
     </div>
     <%
