@@ -60,7 +60,9 @@ public void jspInit() {
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
       rs = stmt.executeQuery( "select * from New WHERE flag = 1");
+      
         while(rs.next()){ 
+            if(rs.getInt(8) == -1){
             %>
 
     <div class="box">
@@ -97,23 +99,24 @@ public void jspInit() {
     </tr>
     </table>
     <div class="buttons2">
+        <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
         <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
         <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
         <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
-
     </div>
     </div>
     <%
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        // データベースとの接続をクローズ
-        try { rs.close(); } catch (Exception e) {}
-        try { stmt.close(); } catch (Exception e) {}
-        try { conn.close(); } catch (Exception e) {}
     }
-        %>
+    }
+    } catch (Exception e) {
+    e.printStackTrace();
+    } finally {
+    // データベースとの接続をクローズ
+    try { rs.close(); } catch (Exception e) {}
+    try { stmt.close(); } catch (Exception e) {}
+    try { conn.close(); } catch (Exception e) {}
+    }
+    %>
 </body>
 
 </html>
