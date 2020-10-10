@@ -60,9 +60,11 @@ public void jspInit() {
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
       rs = stmt.executeQuery( "select * from New WHERE flag = 1");
-      
+
+      rs.next();
+      if(rs.getInt(8) == -1){
         while(rs.next()){ 
-            if(rs.getInt(8) == -1){
+        
             %>
 
     <div class="box">
@@ -95,8 +97,9 @@ public void jspInit() {
                 <td>
                     <%= rs.getString(6)%>
                 </td>
+
+            </tr>
     </div>
-    </tr>
     </table>
     <div class="buttons2">
         <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
@@ -104,9 +107,54 @@ public void jspInit() {
         <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
         <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
     </div>
+    <ul>
+        <% 
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
+            stmt = conn.createStatement();
+             rs = stmt.executeQuery( "select * from New WHERE id = 12");
+                while(rs.next()){ %>
+        <div class="replybox">
+            <table>
+
+                <tr>
+                    <td>
+                        <div id="ID"><%= rs.getInt(1)%>:
+                    </td>
+                    <td>
+                        <div id="TITLE"> <%= rs.getString(4)%></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        名前:<%= rs.getString(2)%>
+                    </td>
+                    <td>
+                        投稿日<%= rs.getString(5)%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <%= rs.getString(6)%>
+                    </td>
+
+                </tr>
+        </div>
+        </table>
+        <div class="buttons2">
+            <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
+            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
+            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
+            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
+
+            <%   }
+    
+            
+            %>
+        </div>
+    </ul>
     </div>
     <%
-    }
+}
     }
     } catch (Exception e) {
     e.printStackTrace();

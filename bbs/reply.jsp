@@ -46,7 +46,7 @@ public void jspInit() {
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
-      rs = stmt.executeQuery( "SELECT * FROM New Where id = " +id);
+      rs = stmt.executeQuery( "SELECT * FROM New WHERE id = " +id);
       rs.next();
     %>
 
