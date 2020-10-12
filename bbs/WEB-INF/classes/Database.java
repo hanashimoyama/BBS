@@ -49,7 +49,7 @@ public class Database extends HttpServlet {
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(url, user, password);
-      String sql = "INSERT into New values(?,?,?,?,?,?,?,?)";
+      String sql = "INSERT into New values(?,?,?,?,?,?,?,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, 0);
       pstmt.setString(2, request.getParameter("name"));
@@ -59,6 +59,7 @@ public class Database extends HttpServlet {
       pstmt.setString(6, request.getParameter("comment"));
       pstmt.setInt(7, 1);
       pstmt.setInt(8, -1);
+      pstmt.setInt(9, 1); // 1は親レスでなおかつ子供がいないとき
       int num = pstmt.executeUpdate();
     } catch (Exception e) {
     } finally {
@@ -153,7 +154,7 @@ public class Database extends HttpServlet {
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(url, user, password);
-      String sql = "INSERT into New values(?,?,?,?,?,?,?,?)";
+      String sql = "INSERT into New values(?,?,?,?,?,?,?,?,?)";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setInt(1, 0);
       pstmt.setString(2, request.getParameter("name"));
@@ -163,7 +164,14 @@ public class Database extends HttpServlet {
       pstmt.setString(6, request.getParameter("comment"));
       pstmt.setInt(7, 1);
       pstmt.setInt(8, Integer.parseInt(request.getParameter("id")));
+      pstmt.setInt(9, 3); // 3は返信レス
       int num = pstmt.executeUpdate();
+
+      sql = "UPDATE New SET  reply_flag = ? WHERE id = ?";
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setInt(1, 2); // 2は親レスでなおかつ子供がいるとき
+      pstmt.setInt(2, Integer.parseInt(request.getParameter("id")));
+      pstmt.executeUpdate();
       RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
       dispatcher.forward(request, response);
     } catch (Exception e) {

@@ -54,12 +54,12 @@ public void jspInit() {
         <input type="hidden" name="trigger" value="reply">
         <input type="hidden" name="id" value="<%=rs.getInt(1)%>">
         <div><label for="t_message">お名前：</label>
-            <input type="text" class="input" name="name" value="<%=rs.getString(2)%>"><br></div>
+            <input type="text" class="input" name="name" value=""><br></div>
         <div><label for="t_message">題名：</label>
-            <input type="text" class="input" name="title" value="<%=rs.getString(4)%>"><br></div>
+            <input type="text" class="input" name="title" value=""><br></div>
         <div><label for="t_message">本文：</label>
             <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard"
-                placeholder="400字以内で入力してください。"><%=rs.getString(6)%></textarea></div>
+                placeholder="400字以内で入力してください。"></textarea></div>
         <div><label for="t_message">パスワード：</label>
             <input type="password" class="input" name="password" value=""><br></div>
         <div class="buttons1">
