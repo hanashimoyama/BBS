@@ -12,7 +12,6 @@ int id = Integer.parseInt(request.getParameter("id"));
 
   %>
 <%!                                                                                                                             
-// サーブレットのinitメソッドに相当
 public void jspInit() {
     try {
         // JDBCドライバをロード
@@ -46,6 +45,7 @@ public void jspInit() {
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
+      // 対象の投稿記事を検索します
       rs = stmt.executeQuery( "SELECT * FROM New Where id = " +id);
       rs.next();
     %>

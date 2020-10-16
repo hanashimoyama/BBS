@@ -3,7 +3,6 @@
 <%@ page import="java.sql.*"%>
 
 <%!
-// サーブレットのinitメソッドに相当
 public void jspInit() {
     try {
         // JDBCドライバをロード
@@ -28,6 +27,7 @@ public void jspInit() {
 <body>
     <h1>掲示板</h1>
     <section>
+        <!--新規投稿のコードです-->
         <h2>新規投稿</h2>
         <form action="./Database" method="POST" id="AjaxForm">
             <input type="hidden" name="trigger" value="insert">
@@ -49,9 +49,10 @@ public void jspInit() {
         </form>
     </section>
     <section>
+        <!--投稿した記事の一覧を表示します-->
         <h2>投稿一覧</h2>
     </section>
-    <%  
+    <%  // DBに接続します
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -59,12 +60,14 @@ public void jspInit() {
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
+      // ↓非表示になっていない（flag = 1)かつ親記事の投稿を検索します
       rs = stmt.executeQuery( "select * from New WHERE flag = 1 AND connection_id = -1");
 
+      // 親記事を呼び出し、条件によって表示を変えます。（connection_idが-1のものが親記事）
         while(rs.next()){
+            // 返信が無い親記事を表示します
             if(rs.getInt(9) == 1){
     %>
-    <h2><%= rs.getInt(9) %></h2>
     <div class="box">
         <table>
 
@@ -106,9 +109,9 @@ public void jspInit() {
     </div>
     </div>
     <%
+    // 返信がある親記事を表示します
 }else if(rs.getInt(9) == 2){
             %>
-            <h2><%= rs.getInt(9) %></h2>
     <div class="box">
         <table>
 
@@ -152,12 +155,15 @@ public void jspInit() {
        
     
     <% 
+    // 親記事の中に、返信レスを表示します
     Connection conn2 = null;
     Statement stmt2 = null;
     ResultSet rs2 = null;
 
     conn2 = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
     stmt2 = conn2.createStatement();
+
+    // ↓親記事のIDとconnection_idが同じものを探して表示させます
     rs2 = stmt2.executeQuery( "select * from New WHERE flag = 1 AND connection_id ="+ rs.getInt(1));
     while(rs2.next()){  
         
@@ -203,10 +209,11 @@ public void jspInit() {
         </div>
     </ul>
     <%
-    rs2.close();
-    stmt2.close();
-    conn2.close();
+ 
 }
+rs2.close();
+stmt2.close();
+conn2.close();
 %>
 </div>
     <%

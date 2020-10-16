@@ -6,6 +6,19 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
 
+/* 
+DBの中身
+1 = int id　レコードを管理するためのid
+2 = varchar user_name 投稿者の名前 
+3 = varchar pass パスワード
+4 = varchar title 題名
+5 = datetime postdate 投稿日時
+6 = varchar sentence 本文
+7 = int flag 非表示か表示かを判断する管理番号 (0 = 非表示　1 = 表示)
+8 = int connection_id 親記事と返信レスを結びつけるためのid　(-1 = 親記事　それ以外の数字 = 対象の返信レスがある親記事のid)
+9 = int reply_flag レコードがどれに該当するのか判断する管理番号 (1 =　親記事（返信なし） 2 = 親記事（返信あり） 3 = 返信レス)
+*/ 
+
 public class Database extends HttpServlet {
   // DBへ接続するのに必要な情報
   Connection conn = null;
@@ -44,7 +57,7 @@ public class Database extends HttpServlet {
 
   }
 
-  // 新規投稿されたとき
+  // 新規投稿
   private void Insert(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
       Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -59,14 +72,14 @@ public class Database extends HttpServlet {
       pstmt.setString(6, request.getParameter("comment"));
       pstmt.setInt(7, 1);
       pstmt.setInt(8, -1);
-      pstmt.setInt(9, 1); // 1は親レスでなおかつ子供がいないとき
+      pstmt.setInt(9, 1); 
       int num = pstmt.executeUpdate();
     } catch (Exception e) {
     } finally {
     }
   }
 
-  // 編集をしたいとき
+  // 編集
   private void Update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
       boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
@@ -97,6 +110,7 @@ public class Database extends HttpServlet {
     }
   }
 
+  // 非表示
   private void Hide(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
       boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
@@ -124,6 +138,7 @@ public class Database extends HttpServlet {
     }
   }
 
+  // 削除
   private void Delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
       boolean check_ps = Auth(Integer.parseInt(request.getParameter("id")), request.getParameter("password"));
@@ -152,6 +167,7 @@ public class Database extends HttpServlet {
 
   private void Reply(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
+      // 返信レスをDBに追加します
       Class.forName("com.mysql.jdbc.Driver").newInstance();
       conn = DriverManager.getConnection(url, user, password);
       String sql = "INSERT into New values(?,?,?,?,?,?,?,?,?)";
@@ -164,12 +180,13 @@ public class Database extends HttpServlet {
       pstmt.setString(6, request.getParameter("comment"));
       pstmt.setInt(7, 1);
       pstmt.setInt(8, Integer.parseInt(request.getParameter("id")));
-      pstmt.setInt(9, 3); // 3は返信レス
+      pstmt.setInt(9, 3); 
       int num = pstmt.executeUpdate();
 
+      // 返信されたとき、対象の親記事のレコードのreply_flagを2（返信あり）に変えます
       sql = "UPDATE New SET  reply_flag = ? WHERE id = ?";
       pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, 2); // 2は親レスでなおかつ子供がいるとき
+      pstmt.setInt(1, 2); 
       pstmt.setInt(2, Integer.parseInt(request.getParameter("id")));
       pstmt.executeUpdate();
       RequestDispatcher dispatcher = request.getRequestDispatcher("/finish.jsp");
@@ -179,6 +196,7 @@ public class Database extends HttpServlet {
     }
   }
 
+  // パスワード認証
   public Boolean Auth(int check_id, String check_pass) throws Exception {
 
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS", "BBS", "SPn!UA5,,iU,");
