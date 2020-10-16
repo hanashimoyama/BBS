@@ -202,9 +202,9 @@ public void jspInit() {
                 </tr>
         </table>
         <div class="buttons2">
-            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
-            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
-            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
+            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs2.getInt(1)%>')">
+            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs2.getInt(1)%>')">
+            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs2.getInt(1)%>')">
         </div>
         </div>
     </ul>
