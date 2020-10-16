@@ -6,7 +6,7 @@
 
 
 <% 
-// 編集するレスのidをURLパラメータから取得する
+// 親記事（返信したいレス）のidをURLパラメータから取得する
 request.setCharacterEncoding("UTF-8");
 int id = Integer.parseInt(request.getParameter("id"));
 
@@ -45,25 +45,25 @@ public void jspInit() {
     try{
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
-      // 対象の投稿記事を検索します
-      rs = stmt.executeQuery( "SELECT * FROM New Where id = " +id);
+      // 対象の投稿記事を検索します(親記事)
+      rs = stmt.executeQuery( "SELECT * FROM New WHERE id = " +id);
       rs.next();
     %>
 
     <form action="./Database" method="POST" 　id="AjaxForm">
-        <input type="hidden" name="trigger" value="update">
+        <input type="hidden" name="trigger" value="reply">
         <input type="hidden" name="id" value="<%=rs.getInt(1)%>">
         <div><label for="t_message">お名前：</label>
-            <input type="text" class="input" name="name" value="<%=rs.getString(2)%>"><br></div>
+            <input type="text" class="input" name="name" value=""><br></div>
         <div><label for="t_message">題名：</label>
-            <input type="text" class="input" name="title" value="<%=rs.getString(4)%>"><br></div>
+            <input type="text" class="input" name="title" value=""><br></div>
         <div><label for="t_message">本文：</label>
             <textarea name="comment" cols="30" rows="3" maxlength="400" wrap="hard"
-                placeholder="400字以内で入力してください。"><%=rs.getString(6)%></textarea></div>
+                placeholder="400字以内で入力してください。"></textarea></div>
         <div><label for="t_message">パスワード：</label>
             <input type="password" class="input" name="password" value=""><br></div>
         <div class="buttons1">
-            <li><input type="submit" Value="編集" class="btn"></li>
+            <li><input type="submit" Value="返信" class="btn"></li>
             <li><input type="button" Value="閉じる" class="btn" onclick="window.close()"></li>
         </div>
     </form>

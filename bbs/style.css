@@ -78,3 +78,14 @@ vertical-align: bottom;
 .btn{
   width:80px;
 }
+
+.replybox{
+
+  width: 550px;
+  margin: 3em auto;
+  padding: 0em;
+  font-weight: normal;
+  color: #000000;/*文字色*/
+  background: #FFF;
+  text-align: left;
+}
