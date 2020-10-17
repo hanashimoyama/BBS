@@ -61,7 +61,7 @@ public void jspInit() {
       conn = DriverManager.getConnection("jdbc:mysql://localhost/BBS","BBS","SPn!UA5,,iU,");
       stmt = conn.createStatement();
       // ↓非表示になっていない（flag = 1)かつ親記事の投稿を検索します
-      rs = stmt.executeQuery( "select * from New WHERE flag = 1 AND connection_id = -1");
+      rs = stmt.executeQuery( "select * from New WHERE connection_id = -1");
 
       // 親記事を呼び出し、条件によって表示を変えます。（connection_idが-1のものが親記事）
         while(rs.next()){
@@ -96,17 +96,24 @@ public void jspInit() {
             </tr>
             <tr>
                 <td>
-                    <%= rs.getString(6)%>
+                    <% if(rs.getInt(7) == 1){
+                    %><%=rs.getString(6)%>
+                    <%}else{
+                        %>
+                    削除されました
+                    <% }
+                    %>
+
                 </td>
             </tr>
-    
-    </table>
-    <div class="buttons2">
-        <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
-        <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
-        <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
-        <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
-    </div>
+
+        </table>
+        <div class="buttons2">
+            <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
+            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
+            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
+            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
+        </div>
     </div>
     <%
     // 返信がある親記事を表示します
@@ -140,21 +147,27 @@ public void jspInit() {
             </tr>
             <tr>
                 <td>
-                    <%= rs.getString(6)%>
+                    <% if(rs.getInt(7) == 1){
+                        %><%=rs.getString(6)%>
+                    <%}else{
+                            %>
+                    削除されました
+                    <% }
+                        %>
                 </td>
             </tr>
-    
-    </table>
-    
-    <div class="buttons2">
-        <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
-        <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
-        <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
-        <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
-    </div>
-       
-    
-    <% 
+
+        </table>
+
+        <div class="buttons2">
+            <input type="button" value="返信" onclick="win_open('reply.jsp','reply','<%=rs.getInt(1)%>')">
+            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs.getInt(1)%>')">
+            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs.getInt(1)%>')">
+            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs.getInt(1)%>')">
+        </div>
+
+
+        <% 
     // 親記事の中に、返信レスを表示します
     Connection conn2 = null;
     Statement stmt2 = null;
@@ -168,54 +181,54 @@ public void jspInit() {
     while(rs2.next()){  
         
     %>
-            <ul>
-        <div class="replybox">
-            <table>
+        <ul>
+            <div class="replybox">
+                <table>
 
-                <tr>
-                    <td>
-                        <div id="ID"><%= rs2.getInt(1)%>:</div>
-                    </td>
-                    <td>
-                        <div id="TITLE">
-                            <%= rs2.getString(4)%>
-                        </div>
-                    </td>
+                    <tr>
+                        <td>
+                            <div id="REPLY_ID"><%= rs2.getInt(1)%>:</div>
+                        </td>
+                        <td>
+                            <div id="TITLE">
+                                <%= rs2.getString(4)%>
+                            </div>
+                        </td>
 
-                </tr>
-                <tr>
+                    </tr>
+                    <tr>
 
-                    <td>
-                        名前:<%= rs2.getString(2)%>
-                    </td>
+                        <td>
+                            名前:<%= rs2.getString(2)%>
+                        </td>
 
 
-                    <td>
-                        投稿日<%= rs2.getString(5)%>
-                    </td>
+                        <td>
+                            投稿日<%= rs2.getString(5)%>
+                        </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <%= rs2.getString(6)%>
-                    </td>
-                </tr>
-        </table>
-        <div class="buttons2">
-            <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs2.getInt(1)%>')">
-            <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs2.getInt(1)%>')">
-            <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs2.getInt(1)%>')">
-        </div>
-        </div>
-    </ul>
-    <%
+                    </tr>
+                    <tr>
+                        <td>
+                            <%= rs2.getString(6)%>
+                        </td>
+                    </tr>
+                </table>
+                <div class="buttons2">
+                    <input type="button" value="編集" onclick="win_open('update.jsp','update','<%=rs2.getInt(1)%>')">
+                    <input type="button" value="非表示" onclick="win_open('hide.jsp','hide','<%=rs2.getInt(1)%>')">
+                    <input type="button" value="削除" onclick="win_open('delete.jsp','delete','<%=rs2.getInt(1)%>')">
+                </div>
+            </div>
+        </ul>
+        <%
  
 }
 rs2.close();
 stmt2.close();
 conn2.close();
 %>
-</div>
+    </div>
     <%
 
     }
